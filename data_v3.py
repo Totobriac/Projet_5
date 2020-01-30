@@ -1,3 +1,4 @@
+
 categories = ['confiseries', 'confitures', 'pizzas', 
               'plats surgeles', 'biscuits', 'boissons gazeuses',
               'cereales', 'plats prepares', 'fromages', 'yaourts',
@@ -7,7 +8,7 @@ categories = ['confiseries', 'confitures', 'pizzas',
 
 welcome_message= "Bienvenue dans la programme"
 
-welcome_menu_message= "Appuyez sur I pour rechercher un produit, A pour consulter la liste des produits conservés, Q pour quitter le programme:"
+welcome_menu_message= "Appuyez sur I pour rechercher un produit, A pour consulter la liste des produits conserves, Q pour quitter le programme:"
 
 line= "__________________________________________________________________________________________________________________________________________________"
 
@@ -19,7 +20,7 @@ healthy_list_menu_text="Appuyez sur M pour revenir au menu principal, l'indice p
 
 healthy_menu_text= "Appuyez sur C pour revenir au menu des categories, M au menu principal, ou l'indice pour choisir ce produit: "
 
-healthy_choice_product_menu_text= "Appuyez sur C pour revenir au menu des categories, M au menu principal, \nO pour consulter sa fiche sur OpenFoodFact.org, \nS pour savoir ou l'acheter, \nZ pour l'ajouter à la liste des substituts \nL pour revenir à la liste des substituts: " 
+healthy_choice_product_menu_text= "Appuyez sur C pour revenir au menu des categories, M au menu principal, \nO pour consulter sa fiche sur OpenFoodFact.org, \nS pour savoir ou l'acheter, \nZ pour l'ajouter a la liste des substituts \nL pour revenir a la liste des substituts: " 
 
 product_menu_text= "Appuyez sur C pour revenir au menu des categories, M au menu principal, \nG pour lui trouver un substitut plus sain, \nO pour consulter sa fiche sur OpenFoodFact.org, \nS pour savoir ou l'acheter: "
 
