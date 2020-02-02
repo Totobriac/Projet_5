@@ -7,6 +7,6 @@ class Db:
         self.db = mysql.connector.connect(
             host="localhost",
             user="root",
-            database="test_off")
+            database="oof_db")
         self.mycursor = self.db.cursor() 
         
