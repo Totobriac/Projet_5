@@ -5,7 +5,7 @@ from menu import Menu
 from db_class import Db
 import webbrowser
 
-new_menu= Menu()
+new_menu = Menu()
 
 while True:
     
