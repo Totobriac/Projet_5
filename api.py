@@ -14,44 +14,52 @@ mycursor = db.cursor()
 
 # mycursor.execute("DROP TABLES off")
 
+"""
+Creation of the off table 
+"""
 mycursor.execute("""CREATE TABLE off(marque VARCHAR(200) NOT NULL,
                 nom VARCHAR(200) NOT NULL, nutriscore VARCHAR(5),
                 store VARCHAR(200) NOT NULL, category VARCHAR(20),
                 code_id BIGINT, productID int PRIMARY KEY AUTO_INCREMENT)""")
 
-for category in categories:
+def create_db():
+    """
+    populate the off TABLE
+    :return:
+    """
+    for category in categories:
 
-    parameters = {
-        "action": "process",
-        "json": True,
-        "page_size": 20,
-        "tagtype_0": "categories",
-        "tag_contains_0": 'contains',
-        'tag_0': category,
-        "page": 1
-    }
+        parameters = {
+            "action": "process",
+            "json": True,
+            "page_size": 20,
+            "tagtype_0": "categories",
+            "tag_contains_0": 'contains',
+            'tag_0': category,
+            "page": 1
+        }
 
-    while parameters['page'] < 13:
+        while parameters['page'] < 13:
 
-        response = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?",
-                                parameters)
+            response = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?",
+                                    parameters)
 
-        for i in range(len(response.json()["products"])):
-            try:
-                marque = response.json()["products"][i]["brands"]
-                nom = response.json()["products"][i]["product_name"]
-                nutriscore = response.json()["products"][i]["nutriscore_grade"]
-                store = response.json()["products"][i]["stores"]
-                code_id = response.json()["products"][i]["id"]
+            for i in range(len(response.json()["products"])):
+                try:
+                    marque = response.json()["products"][i]["brands"]
+                    nom = response.json()["products"][i]["product_name"]
+                    nutriscore = response.json()["products"][i]["nutriscore_grade"]
+                    store = response.json()["products"][i]["stores"]
+                    code_id = response.json()["products"][i]["id"]
 
-                mycursor.execute(""""INSERT INTO off (marque, nom,
-                        nutriscore, store, category, code_id)
-                        VALUES (%s,%s,%s,%s,%s,%s)",
-                        (marque, nom, nutriscore, store, category, code_id)""")
+                    mycursor.execute(""""INSERT INTO off (marque, nom,
+                            nutriscore, store, category, code_id)
+                            VALUES (%s,%s,%s,%s,%s,%s)",
+                            (marque, nom, nutriscore, store, category, code_id)""")
 
-                db.commit()
+                    db.commit()
 
-            except KeyError:
-                pass
+                except KeyError:
+                    pass
 
-        parameters['page'] += 1
+            parameters['page'] += 1

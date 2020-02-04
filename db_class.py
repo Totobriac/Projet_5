@@ -2,7 +2,9 @@ import mysql.connector
 
 
 class Db:
-
+    """
+    Class that initiate the oof_db
+    """
     def __init__(self):
         self.db = mysql.connector.connect(
             host="localhost",

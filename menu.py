@@ -6,12 +6,20 @@ from db_class import Db
 
 
 class Menu:
+    """
+    This class initiate the menu
+    """
 
     def __init__(self):
         self.data_base = Db()
         self.mycursor = self.data_base.db.cursor()
 
     def welcome_menu(self):
+        """
+        Function that displays the welcome menu and main menu
+        :return: redirects the user to the item browser, the substitute list
+        or to quit the program
+        """
         print(text[1])
         self.choice = input(text[2])
         print(text[3])
@@ -32,6 +40,10 @@ class Menu:
         self.page = 1
 
     def choose_categories(self):
+        """
+        Function that displays the categories list
+        :return: redirects the user to one category
+        """
         self.x = 1
         for i in categories:
             print("%-5s %s" % (self.x, i))
@@ -51,6 +63,10 @@ class Menu:
             self.choose_categories()
 
     def display_category(self):
+        """
+        Function that displays the content of the chosen category
+        :return: a page of 20 items of the chosen category
+        """
         print("%-10s %-70s %-60s %s"
               % ("Indice", "Marque", "Nom", "#"+self.selected_category))
         print(text[3])
@@ -61,6 +77,11 @@ class Menu:
         print("#" * 60, "PAGE ", self.page, "#" * 76)
 
     def back_category_or_menu(self):
+        """
+        Function that makes the user coming back to the main menu or the
+        category list
+        :return: redirects to the main menu or the categories list
+        """
         if self.nav == "m":
             self.searching_through = False
             self.choosing_categorie = False
@@ -68,6 +89,11 @@ class Menu:
             self.searching_through = False
 
     def product_menu_info(self):
+        """
+        Function that displays the information of the chosen product
+        :return: the nutriscore, brand, name and store where the product
+        can be find
+        """
         print(text[3])
         print("%-10s %-70s %-60s %s"
               % ("Nutriscore", "Marque", "Nom", "Magazin"))
@@ -80,6 +106,11 @@ class Menu:
         print(text[3])
 
     def display_store_or_off(self):
+        """
+        Function the opens in a browser where the product can be found or
+        it's page on OFF
+        :return: a googlemap page or an OFF page
+        """
         if self.nav == "o":
             self.url = "https://fr.openfoodfacts.org/produit/"\
                 + str(self.myresult[self.sel_items][5])
@@ -90,6 +121,11 @@ class Menu:
             webbrowser.open_new_tab(self.url)
 
     def menu_action(self):
+        """
+        Function that makes the user search through the pages of the products of the chosen
+        category and to chose one. User can exit and go back to categories menu
+        :return: the product information, the main menu or the categories menu
+        """
         try:
             self.nav = input(text[4])
             if self.nav == "n":
@@ -119,6 +155,13 @@ class Menu:
             print('Veuillez rentrer un choix valide svp.')
 
     def healthy_menu(self):
+        """
+        Function that displays healthier substitutes to a chosen product from
+        a chosen category. User can then select one, go back to main menu
+        or back to the categories list
+        :return: a list of 20 healthier substitutes and the information
+        on a selected one
+        """
         self.sql = """SELECT nom, marque, productID, nutriscore, store, code_ID
             FROM off WHERE category = %s ORDER BY nutriscore ASC"""
         self.adr = (self.selected_category,)
@@ -152,6 +195,13 @@ class Menu:
             self.healthy_menu()
 
     def healthy_choice_product_menu(self):
+        """
+        Function that display the menu of a selected healthier substitute.
+        User can go back to main menu, go back to the categories list,
+        checks it's OFF page, where it's sold on googlemap, go back to the
+        healthier substitute list or load this substitute into a db
+        :return: "subsitute" db
+        """
         print(text[5])
         self.nav = input(text[8])
 
@@ -184,6 +234,13 @@ class Menu:
             self.healthy_choice_product_menu()
 
     def product_menu(self):
+        """
+        Function that displays the menu of a selected product,
+        user can go back to main menu, go back to the categories list,
+        checks it's OFF page, where it's sold on googlemap and look for
+        an healthier substitute
+        :return: an healthier substitute list
+        """
         print(text[5])
         self.nav = input(text[9])
 
@@ -202,6 +259,10 @@ class Menu:
             self.product_menu()
 
     def display_substitute_list(self):
+        """
+        Function that displays the substitute db
+        :return: a list of 20 healthier substitutes
+        """
         self.mycursor.execute("""CREATE TABLE IF NOT EXISTS substitute
                             (nom VARCHAR(100), marque VARCHAR(100),
                             category VARCHAR(20), nutriscore VARCHAR(1),
@@ -218,6 +279,11 @@ class Menu:
         self.healthy_list_menu()
 
     def healthy_list_menu(self):
+        """
+        Function that displays the menu of the substitute list;
+        User can erase it or select one of it's product
+        :return:
+        """
         print(text[5])
         try:
             self.nav = input(text[6])
@@ -243,6 +309,11 @@ class Menu:
             self.healthy_list_menu()
 
     def healthy_item_menu(self):
+        """
+        Functino that displays the information on a selected item from the
+        substitute list
+        :return:
+        """
         print(text[5])
         self.page = 1
         self.product_menu_info()
