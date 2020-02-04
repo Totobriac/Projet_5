@@ -1,4 +1,3 @@
-import json
 import requests
 import mysql.connector
 from data import categories
@@ -14,7 +13,6 @@ mycursor = db.cursor()
 # mycursor = db.cursor()
 
 # mycursor.execute("DROP TABLES off")
-
 
 mycursor.execute("""CREATE TABLE off(marque VARCHAR(200) NOT NULL,
                 nom VARCHAR(200) NOT NULL, nutriscore VARCHAR(5),
@@ -46,11 +44,10 @@ for category in categories:
                 store = response.json()["products"][i]["stores"]
                 code_id = response.json()["products"][i]["id"]
 
-                # mycursor.execute(""""INSERT INTO off (marque, nom, nutriscore,
-                #         store, category, code_id) VALUES (%s,%s,%s,%s,%s,%s)",
-                #         (marque, nom, nutriscore, store, category, code_id)""")
-                
-                mycursor.execute("INSERT INTO off (marque, nom, nutriscore,store, category, code_id) VALUES (%s,%s,%s,%s,%s,%s)",(marque,nom,nutriscore,store,category, code_id))
+                mycursor.execute(""""INSERT INTO off (marque, nom,
+                        nutriscore, store, category, code_id)
+                        VALUES (%s,%s,%s,%s,%s,%s)",
+                        (marque, nom, nutriscore, store, category, code_id)""")
 
                 db.commit()
 

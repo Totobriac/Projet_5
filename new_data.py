@@ -1,4 +1,4 @@
-categories = ['confiseries', 'confitures', 'pizzas', 
+categories = ['confiseries', 'confitures', 'pizzas',
               'plats surgeles', 'biscuits', 'boissons gazeuses',
               'cereales', 'plats prepares', 'fromages', 'yaourts',
               'pates', 'aperitifs', 'glaces', 'desserts', 'jus de fruits',
