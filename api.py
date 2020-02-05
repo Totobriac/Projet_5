@@ -17,7 +17,7 @@ mycursor = db.cursor()
 """
 Creation of the off table 
 """
-mycursor.execute("""CREATE TABLE off(marque VARCHAR(200) NOT NULL,
+mycursor.execute("""CREATE TABLE IF NOT EXISTS off(marque VARCHAR(200) NOT NULL,
                 nom VARCHAR(200) NOT NULL, nutriscore VARCHAR(5),
                 store VARCHAR(200) NOT NULL, category VARCHAR(20),
                 code_id BIGINT, productID int PRIMARY KEY AUTO_INCREMENT)""")
@@ -63,3 +63,5 @@ def create_db():
                     pass
 
             parameters['page'] += 1
+
+create_db()
